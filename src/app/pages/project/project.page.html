@@ -1,0 +1,461 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tesishubfire">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>TesisHub</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSession()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <span style="color: #ffffff;">{{projectForm.get('client_name')?.value}}</span> -->
+  <div class="headerTitle">
+    Proyectos  
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </div>
+  <!-- Listar todos los elementos -->
+  <ion-list *ngIf="displayList">
+    @for (items of projects; track items.project_id){
+    <ion-card (click)="(viewProject(items, items.uid))" style="cursor: pointer">
+      <ion-card-header>
+        <ion-card-title>{{ items.titulo }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{items.ciudad}}</p>
+        <p>Inicio: {{ formatFecha(items.fecha_inicio,"fechita") }}</p>
+        <p style="color: var(--ion-color-tesishubfire-subt)">
+          Status: {{ items.state }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+    }
+  </ion-list>
+  <!-- Listar todos los elementos -->
+
+  <!-- Mostrar detalles de un elemento -->
+  <ion-list *ngIf="displayView">
+    <ion-card>
+      <ion-card-header style="color: #9bacc7" class="ioncardtitle">
+        Datos del Cliente
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label class="data-label">Nombre</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.client_name }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Email</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.client_email }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Número de WhatsApp </ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.client_whatsapp }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">País</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.pais }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Ciudad</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.ciudad }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Profesor Asignado</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.tutor_name }}</ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header style="color: #9bacc7" class="ioncardtitle">
+        Información relevante
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label class="data-label">Titulo</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.titulo }}</ion-note>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label class="data-label">Descripcion</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-text readonly style="color: #ffffff; font-size: 12px">
+            {{ pdet.descripcion }}
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Bibliografía</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.bibliografia }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Carrera</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.carrera }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Especialidad</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.especialidad }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Tema</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.tema }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Universidad</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.universidad }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Tipo de Letra</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.tipofuente }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Tamaño de Letra</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.tamanofuente }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Interlineado</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.interlineado }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Número de páginas</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.numero_paginas }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Número de entregas</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.entregas }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Fecha de inicio</ion-label>
+          <ion-note slot="end" class="data-value">{{ formatFecha(pdet.fecha_inicio) }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Fecha de entrega 1</ion-label>
+          <ion-note slot="end" class="data-value">{{ formatFecha(pdet.fecha_entrega1) }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Fecha de entrega 2</ion-label>
+          <ion-note slot="end" class="data-value">{{ formatFecha(pdet.fecha_entrega2) }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Fecha de entrega 3</ion-label>
+          <ion-note slot="end" class="data-value">{{ formatFecha(pdet.fecha_entrega3) }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Fecha de entrega 4</ion-label>
+          <ion-note slot="end" class="data-value">{{ formatFecha(pdet.fecha_entrega4) }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="data-label">Presupuesto</ion-label>
+          <ion-note slot="end" class="data-value">{{ pdet.presupuesto }}</ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header style="color: #9bacc7">
+        Documentos del proyecto
+      </ion-card-header>
+      <ion-card-content> </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <!-- Mostrar detalles de un elemento -->
+
+
+  <!-- new and edit form -->
+  <form [formGroup]="projectForm" *ngIf="displayform">
+    <ion-card color="secondary">
+      <ion-header>
+        <ion-card-title class="ioncardtitle">Datos del Cliente</ion-card-title>
+      </ion-header>
+      <ion-card-content>
+        
+        <ion-item>
+          <ion-label position="floating">Nombre Cliente (Alumno)</ion-label>
+          <ion-select formControlName="client_name" aria-label="Nombre Cliente (Alumno)">
+            @for (items of clientDet; track items.id){
+              <ion-select-option value="{{ items.name }}{{ items.lastname }}">{{ items.name }}{{ items.lastname}}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input [clearInput]="true" formControlName="client_email" type="email" placeholder="email@domain.com" aria-label="Email" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">WhatsApp</ion-label>
+          <ion-input [clearInput]="true" formControlName="client_whatsapp" type="tel" placeholder="8888-888-8888" aria-label="WhatsApp" class="input"></ion-input>
+        </ion-item>
+
+        <!-- <ion-item>
+          <ion-label position="stacked">País</ion-label>
+          <ion-input formControlName="pais" aria-label="País" class="input"></ion-input>
+        </ion-item> -->
+        <ion-item>
+          <ion-label position="floating">País:</ion-label>
+          <ion-select formControlName="pais" aria-label="País">
+            @for (items of CountryDet; track items.countryId){
+              <ion-select-option value="{{ items.countryName }}">{{ items.countryName }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="floating">Ciudad:</ion-label>
+          <ion-select formControlName="ciudad" aria-label="Ciudad">
+            @for (items of CityDet; track items.cityId){
+              <ion-select-option value="{{ items.cityName }}">{{ items.cityName }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card color="secondary">
+      <ion-header>
+        <ion-card-title class="ioncardtitle">Información relevante</ion-card-title>
+      </ion-header>
+      <ion-card-content>
+
+        <ion-item>
+          <ion-label position="floating">Profesor Asignado</ion-label>
+          <ion-select formControlName="tutor_name" aria-label="Profesor Asignado">
+            @for (items of tutorDet; track items.id){
+              <ion-select-option value="{{ items.name }}{{ items.lastname }}">{{ items.name }}{{ items.lastname}}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Título del Proyecto</ion-label>
+          <ion-input [clearInput]="true" formControlName="titulo" aria-label="Título del Proyecto" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Descripción</ion-label>
+          <ion-textarea rows="10" formControlName="descripcion" aria-label="Descripción" class="input"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Bibliografía</ion-label>
+          <ion-textarea formControlName="bibliografia" aria-label="Bibliografía" class="input"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Carrera</ion-label>
+          <ion-input [clearInput]="true" formControlName="carrera" aria-label="Carrera" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Especialidad</ion-label>
+          <ion-input [clearInput]="true" formControlName="especialidad" aria-label="Especialidad" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Tema</ion-label>
+          <ion-input [clearInput]="true" formControlName="tema" aria-label="Tema" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Universidad</ion-label>
+          <ion-input [clearInput]="true" formControlName="universidad" aria-label="Universidad" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Tipo de Fuente</ion-label>
+          <ion-input [clearInput]="true" formControlName="tipofuente" aria-label="Tipo de Fuente" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Tamaño de Fuente</ion-label>
+          <ion-input [clearInput]="true" formControlName="tamanofuente" aria-label="Tamaño de Fuente" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Interlineado</ion-label>
+          <ion-input [clearInput]="true" formControlName="interlineado" aria-label="Interlineado" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Número de páginas</ion-label>
+          <ion-input [clearInput]="true" formControlName="numero_paginas" type="number" aria-label="Número de páginas" class="input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Número de entregas</ion-label>
+          <ion-input [clearInput]="true" formControlName="entregas" type="number" aria-label="Número de entregas" class="input"></ion-input>
+        </ion-item>
+
+
+        
+
+        <ion-item>
+          <ion-label position="stacked">Fecha de inicio</ion-label>
+          <ion-datetime-button datetime="fecha_inicio"></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime 
+                presentation="date"
+                [preferWheel]="true"
+                locale="es-Ve" 
+                [showDefaultButtons]="true" 
+                doneText="Aceptar" 
+                cancelText="Cancelar" 
+                formControlName="fecha_inicio" 
+                id="fecha_inicio"
+              >
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Fecha de entrega 1</ion-label>
+          <ion-datetime-button datetime="fecha_entrega1"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime 
+                presentation="date"
+                [preferWheel]="true"
+                locale="es-Ve" 
+                [showDefaultButtons]="true" 
+                doneText="Aceptar" 
+                cancelText="Cancelar"
+                formControlName="fecha_entrega1" id="fecha_entrega1">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Fecha de entrega 2</ion-label>
+          <ion-datetime-button datetime="fecha_entrega2"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime 
+                presentation="date"
+                [preferWheel]="true"
+                locale="es-Ve" 
+                [showDefaultButtons]="true" 
+                doneText="Aceptar" 
+                cancelText="Cancelar"
+                formControlName="fecha_entrega2" id="fecha_entrega2">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Fecha de entrega 3</ion-label>
+          <ion-datetime-button datetime="fecha_entrega3"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime 
+                presentation="date"
+                [preferWheel]="true"
+                locale="es-Ve" 
+                [showDefaultButtons]="true" 
+                doneText="Aceptar" 
+                cancelText="Cancelar"
+                formControlName="fecha_entrega3" id="fecha_entrega3">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Fecha de entrega 4</ion-label>
+          <ion-datetime-button datetime="fecha_entrega4"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime 
+                presentation="date"
+                [preferWheel]="true"
+                locale="es-Ve" 
+                [showDefaultButtons]="true" 
+                doneText="Aceptar" 
+                cancelText="Cancelar"
+                formControlName="fecha_entrega4" id="fecha_entrega4">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+
+        <ion-button (click)="editform()">
+          <ion-label>Guardar</ion-label>
+        </ion-button>
+
+     </ion-card-content>
+    </ion-card>
+  </form>
+  <!-- new and edit form -->
+
+
+
+  <!-- Alert - Mensaje de confirmacion-->
+  <ion-fab slot="fixed" vertical="top" horizontal="end" *ngIf="displayFab">
+    <ion-fab-button>
+      <ion-icon name="chevron-down-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button id="present-alert">
+        <ion-icon style="color: var(--ion-color-danger)" name="trash-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-alert class="custom-alert" trigger="present-alert" header="¡Confirmación requerida!"
+        [message]="'¿Estás seguro de que deseas eliminar el proyecto: ' + pdet.titulo + ' de forma permanente?'"
+        [buttons]="alertButtons" (didDismiss)="setResult($event)">
+      </ion-alert>
+      <ion-fab-button (click)="showEditform()">
+        <ion-icon style="color: var(--ion-color-tesishubfire-shade)" name="create-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="sendSms()">
+        <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="callStorage()">
+        <ion-icon name="document-attach-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="goBack()">
+        <ion-icon style="color: var(--ion-color-tesishubfire-shade)" name="chevron-back-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+
+  <!-- Alert - Mensaje de confirmacion-->
+</ion-content>

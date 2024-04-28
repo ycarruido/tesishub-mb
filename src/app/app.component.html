@@ -1,0 +1,62 @@
+<ion-app>
+  
+  <ion-menu contentId="main-content" *ngIf="login">
+    <ion-header>
+      <ion-toolbar color="tesishubfire">
+        <ion-title>TesisHub</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item button [routerLink]="['/main']">
+            <ion-icon slot="start" name="home"></ion-icon>
+            <ion-label>Inicio </ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/dashboard']" *ngIf="tipoUsr==='Admin'">
+            <ion-icon slot="start" name="speedometer"></ion-icon>
+            <ion-label>Dashboard</ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/project']">
+            <ion-icon slot="start" name="bar-chart"></ion-icon>
+            <ion-label>Proyectos</ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/leads']" *ngIf="tipoUsr==='Admin' || tipoUsr==='Profesor' || tipoUsr==='Asistente'">
+            <ion-icon slot="start" name="funnel"></ion-icon>
+            <ion-label>Proyectos Potenciales</ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/managerequests']" *ngIf="tipoUsr==='Admin' || tipoUsr==='Asistente'">
+            <ion-icon slot="start" name="mail"></ion-icon>
+            <ion-label>Gestión Solicitudes</ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/invoices']" *ngIf="tipoUsr==='Admin' || tipoUsr==='Asistente'">
+            <ion-icon slot="start" name="document-text"></ion-icon>
+            <ion-label>Facturas</ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/infor']">
+            <ion-icon slot="start" name="information-circle"></ion-icon>
+            <ion-label>Información</ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/admincontact']">
+            <ion-icon slot="start" name="chatbox"></ion-icon>
+            <ion-label>Consulta Adm</ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/settings']"  *ngIf="tipoUsr==='Admin' || tipoUsr==='Asistente'">
+            <ion-icon slot="start" name="ellipsis-horizontal"></ion-icon>
+            <ion-label>Configuración</ion-label>
+          </ion-item>
+          <!-- <ion-item button [routerLink]="['/user']">
+            <ion-icon slot="start" name="people"></ion-icon>
+            <ion-label>Usuarios</ion-label>
+          </ion-item>
+          <ion-item button [routerLink]="['/zproduct-list']">
+            <ion-icon slot="start" name="shirt"></ion-icon>
+            <ion-label>Lista de Productos</ion-label>
+          </ion-item> -->
+        </ion-menu-toggle>
+      </ion-list>
+     </ion-content> <!--This is the menu content. -->
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

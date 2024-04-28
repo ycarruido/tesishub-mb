@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tesishubfire">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>TesisHub</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSession()">
+        <ion-icon  name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- <ion-button [routerLink]="['/user']" >User</ion-button> -->
+
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>TesisHub</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding"> 
+      <div class="headerTitle">
+        ¡Bienvenido a TesisHub!
+      </div>
+      <ion-card>
+        <ion-card-content>
+          <p>Gestiona proyectos de forma eficiente, asigna tareas, colabora y sigue el progreso.</p>
+          <p>Funciones avanzadas de seguridad para proteger tus datos y brindarte control total.</p>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-content>
+  </div>
+
+</ion-content>

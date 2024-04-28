@@ -1,0 +1,27 @@
+
+
+.data-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .data-label {
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 14px;
+  }
+  
+  .data-value {
+    color: #ffffff;
+  }
+
+  ion-item{
+    --background: var(--ion-color-tesishubfire-tint);
+  }
+
+  ion-list{
+    background-color: var(--ion-color-tesishubfire-tint);
+  }

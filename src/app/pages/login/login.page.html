@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tesishubfire">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="background-image">
+
+    <ion-card>
+
+      <div class="welcome">
+        <!-- <ion-img src="assets/img/logo.png"/> -->
+        <ion-label>Tesis<span style="color:#dc3545;">Hub</span></ion-label>
+        <p>Inicia sesión para acceder a tu cuenta</p>
+      </div>
+
+      <!-- Formulario Reactivo -->
+      <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
+        <div class="ion-padding">
+          <ion-item>
+            <ion-icon name="at-outline"></ion-icon>
+            <ion-input type="email" formControlName="email" placeholder="Correo electrónico" class="input"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input type="password" formControlName="password" placeholder="Contraseña" class="input"></ion-input>
+          </ion-item>
+          <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Iniciar sesión</ion-button>
+          <div class="passwdReset">
+            <a style="color: var(--ion-color-tesishub-tint)" [routerLink]="['/passwd-reset']">Recuperar contraseña</a>
+          </div>
+        </div>
+      </form>
+
+      <!-- <ion-button id="open-toast">Open Toast</ion-button>
+      <ion-toast trigger="open-toast" message="Usuario o Contraseña incorrecta!" [duration]="3000" icon="warning-outline"></ion-toast> -->
+
+      <!-- <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content> -->
+    </ion-card>
+  </div>
+</ion-content>

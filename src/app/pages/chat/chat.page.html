@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tesishubfire">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>TesisHub</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSession()">
+        <ion-icon  name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+<div class="headerTitle2">
+  {{ this.id }} ({{ this.tituloPrd }})
+</div> 
+<ion-content [fullscreen]="true" class="chat-content" #contentElement>
+    <ion-card>
+      <ion-card-content class="card-body" #chatBody>
+        <div *ngFor="let message of chatMessages" class="msmcontent">
+          <div style="overflow: hidden;"
+                [ngClass]="{
+                'current-user-message': message.senderUid === currentUserUid && message.status !== 'Refused',
+                'current-user-message-refused': ((message.senderUid === currentUserUid && message.status === 'Refused') || (message.senderUid !== currentUserUid && message.status === 'Refused')),
+                'other-user-message': message.senderUid !== currentUserUid && message.status !== 'E'
+                }">
+            <ng-container *ngIf="message.status === 'Released'">
+              {{ message.message }}
+            </ng-container>
+            <ng-container *ngIf="message.status === 'Refused'">
+              <ion-icon name="lock-closed"></ion-icon>
+            </ng-container>
+            <ng-container *ngIf="message.status === 'E' && message.senderUid === currentUserUid">
+              {{ message.message }}
+            </ng-container>
+    
+            <div *ngIf="message.status === 'Released'"  class="smstime">
+              <strong>{{ message.sendersName.split(' ')[0] }}.</strong>
+              {{ message.formattedTimestamp }}
+              <ion-icon name="checkmark-done" class="sent-icon"></ion-icon>
+            </div>
+    
+            <div *ngIf="message.status === 'Refused'" class="rejected-sms">
+              <strong>{{ message.sendersName.split(' ')[0] }}.</strong>
+              {{ message.formattedTimestamp }}
+              <span class="rejected-sms"> - Este mensaje ha sido bloqueado</span>
+              <ion-icon name="close-circle" class="rejected-icon"></ion-icon>
+            </div>
+    
+            <div *ngIf="message.status === 'E' && message.senderUid === currentUserUid" class="smstime">
+              <strong>{{ message.sendersName.split(' ')[0] }}.</strong>
+              {{ message.formattedTimestamp }}
+              <span class="moderation-text"> - Comentario en moderación</span>
+              <ion-icon name="time-outline" class="moderation-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+</ion-content>
+
+<ion-footer position="fixed">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <form [formGroup]="chatForm" style="display: flex; align-items: center;">
+        <ion-textarea cols="40" rows="2" formControlName="newMessage" placeholder="Escribe un mensaje" aria-label="newMessage" class="input" style="flex: 1;" (keyup)="sendMessageOnEnter($event)"></ion-textarea> <!-- Ajustar el campo de texto -->
+        <ion-button fill="clear" [disabled]="sendingMessage" (click)="sendMessage()" style="margin-left: 10px;"> <!-- Utilizar fill="clear" para el botón -->
+          <ion-icon name="send"></ion-icon> <!-- Agregar icono de enviar -->
+        </ion-button>
+      </form>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

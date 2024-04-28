@@ -1,0 +1,143 @@
+ion-card{
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+    padding: 5px;
+}
+
+.card-body {
+    //  height: 300px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: thin; /* Para navegadores basados en WebKit */
+    scrollbar-color: transparent transparent;
+
+    // flex: 1; display: flex; flex-direction: column;
+}
+
+.chat-content {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin; /* Para navegadores basados en WebKit */
+  scrollbar-color: transparent transparent;
+
+  //height: 80vh; /* Establece la altura máxima del contenedor para que aparezca la barra de desplazamiento */
+}
+
+/* Estilos de la barra de desplazamiento para navegadores basados en WebKit */
+.card-body::-webkit-scrollbar {
+  width: 6px;
+}
+  
+.card-body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+  /* Style for ion-footer to prevent it from moving up when tapped */
+ion-footer[position="fixed"] {
+    bottom: 0;
+    width: 100%;
+    z-index: 100; /* Ensure footer stays on top */
+    padding: 2px 10px, 2px, 10px;
+}
+
+// ion-content::part(background) {
+//   background: #ffffff;
+// }
+  
+  /* Style for ion-toolbar to fill the width of the footer */
+ ion-toolbar {
+    width: 100%;
+ }
+
+ .current-user-message {
+  /* background-color: #f1c6f0;
+  color: #000000; */
+  background-color: #ccf7ff;
+  color: #2b2e2e;
+  font-size: 14px;
+  margin: 3px;
+  padding: 5px 10px 5px 10px;
+  /* border-radius: 10px; */
+
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+
+  text-align: left;
+  display: inline-block;
+}
+
+.other-user-message {
+  background-color: #f8e9fb;
+  color: #2b2e2e;
+  /* background-color: #d8fbd2;
+  color: #000; */
+  font-size: 14px;;
+  margin: 3px;
+  padding: 5px 10px 5px 10px;
+  /* border-radius: 10px; */
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  text-align: right;
+  display: inline-block;
+}
+
+.msmcontent{
+  display: block;
+  text-align: right;
+}
+
+.smstime{
+  font-size: x-small;
+  color: rgb(1, 9, 24);
+}
+
+.rejected-sms{
+  color: var(--ion-color-warning);
+  text-decoration:none;
+  font-size: 9px;
+}
+
+.rejected-icon{
+  margin-left: 2px;
+  color: var(--ion-color-warning);
+}
+
+.moderation-text{
+  color: #022c26;; text-decoration:none;font-size: 12px;
+}
+
+.moderation-icon{
+  margin-left: 2px;
+  color: grey;
+}
+
+.current-user-message-refused {
+  background-color: rgb(73, 73, 89, 0.2);
+  font-size: 14px;;
+  margin: 3px;
+  padding: 5px 10px 5px 10px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  text-align: right;
+  display: inline-block;
+}
+
+.headerTitle2 {
+  //background-color: var(--ion-color-tesishubv2);/* Color de fondo del encabezado personalizado */
+  //color: var(--ion-color-tesishub);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--ion-color-tesishubfire-shade);
+  color: var(--ion-color-tesishubfire-contrast);
+  padding: 10px 10px 10px 15px; /* Espaciado interno del encabezado */
+  // margin: 0 5px 5px 5px;
+  //border-bottom: 1px solid #ccc; /* Línea divisoria en la parte inferior del encabezado */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  // border-radius: 7px;
+}

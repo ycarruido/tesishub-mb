@@ -1,0 +1,7 @@
+{
+  "name": "tesishubMb\t",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

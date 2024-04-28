@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tesishubfire">
+    
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>TesisHub</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSession()">
+        <ion-icon  name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header color="tesishubv2">
+      <ion-card-title>Usuarios</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+
+      <!-- <ion-list>
+        @for (user of users; track user.id){
+          <ion-item>
+            <ion-label>
+              <h2>{{ user.id }} - {{ user.name }}</h2>
+              <p>{{ user.email }}</p>
+              <p>{{ user.user_type }}</p>
+            </ion-label>
+          </ion-item>
+        }
+      </ion-list> -->
+    
+      <ion-list>
+        @for (user of users; track user.id){
+          <ion-card color="light">
+            <ion-card-header>
+              <ion-card-subtitle>{{user.id}}</ion-card-subtitle>
+              <ion-card-title>{{ user.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Email: {{ user.email }}</p>
+              <p>Tipo: {{ user.user_type }}</p>
+            </ion-card-content>
+          </ion-card>
+        }
+      </ion-list>
+
+
+    </ion-card-content>
+  </ion-card>
+
+  
+</ion-content>
