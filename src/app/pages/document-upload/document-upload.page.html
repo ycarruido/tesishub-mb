@@ -19,4 +19,45 @@
   <div class="headerTitle">
     Documentos del proyecto
   </div>
+
+  <ion-card>
+    
+    <ion-card-content>
+      <form [formGroup]="docForm">
+        <ion-item>
+          <ion-input formControlName="title" label="Título" aria-label="Título" type="input"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="numeroPaginas" label="Páginas" aria-label="Páginas" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="porcentajeAvance" label="Porcentaje de Avance" aria-label="Porcentaje de Avance" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select formControlName="tipoDocumento" label="Tipo de Documento*" aria-label="Tipo de Documento">
+              <ion-select-option>Avance de proyecto (Entrega)</ion-select-option>
+              <ion-select-option>Documentos de referencia (Preliminares, Arranque)</ion-select-option>
+              <ion-select-option>Correcciones</ion-select-option>
+              <ion-select-option>Pautas universidad</ion-select-option>
+              <ion-select-option>Plagio</ion-select-option>
+              <ion-select-option>Avance propio</ion-select-option>
+              <ion-select-option>PowerPoint</ion-select-option>
+              <ion-select-option>Esquema</ion-select-option>
+              <ion-select-option>Instrucciones generales</ion-select-option>
+              <ion-select-option>Rúbrica</ion-select-option>
+              <ion-select-option>Informe del tutor</ion-select-option>
+              <ion-select-option>Informe de la comisión / jurado</ion-select-option>
+              <ion-select-option>Calificación obtenida</ion-select-option>
+              <ion-select-option>Otro</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-input aria-label="Subir archivo"
+            (change)="onFileSelected($event)" accept=".pdf, .doc, .docx" type="file">
+          </ion-input>
+        </ion-item>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
